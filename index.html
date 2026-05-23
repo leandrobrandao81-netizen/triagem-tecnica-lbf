@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robustez técnica para decisões processuais | LBF Consultoria</title>
+  <style>
+    :root{
+      --yellow:#FFC800;
+      --dark:#24272d;
+      --dark-2:#1f2228;
+      --text:#24262b;
+      --muted:#6e727c;
+      --line:#e8e8e8;
+      --soft:#f7f7f5;
+      --white:#ffffff;
+      --risk-low:#d9f7df;
+      --risk-medium:#fff2bd;
+      --risk-high:#ffd8d3;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      min-height:100vh;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(255,200,0,.22), transparent 24%),
+        radial-gradient(circle at 94% 58%, rgba(255,200,0,.14), transparent 28%),
+        linear-gradient(180deg,#fafafa 0%,#fff 100%);
+    }
+
+    .page{width:min(1180px,92vw);margin:0 auto}
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:22px 0;
+    }
+
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{
+      width:42px;height:42px;border-radius:50%;
+      background:var(--yellow);
+      display:grid;place-items:center;
+      font-weight:900;font-size:12px;color:#111;
+      box-shadow:0 8px 24px rgba(255,200,0,.25);
+    }
+    .brand-text strong{display:block;font-size:14px;line-height:1}
+    .brand-text span{font-size:11px;color:var(--muted)}
+
+    nav{display:flex;align-items:center;gap:28px;font-size:12px}
+    nav a{color:#484b52;text-decoration:none}
+    .nav-cta{
+      background:var(--yellow);
+      color:#111;
+      border:none;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 8px 20px rgba(255,200,0,.20);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.55fr .85fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:8px;
+    }
+
+    .hero-card{
+      min-height:295px;
+      border-radius:18px;
+      padding:34px;
+      background:
+        radial-gradient(circle at 86% 86%, rgba(255,200,0,.32), transparent 24%),
+        linear-gradient(135deg,#24272d 0%,#171a20 100%);
+      color:white;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 22px 70px rgba(25,27,31,.18);
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--yellow);
+      color:#111;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      margin-bottom:20px;
+    }
+
+    h1{
+      max-width:650px;
+      font-size:52px;
+      line-height:.96;
+      letter-spacing:-.045em;
+      margin-bottom:18px;
+    }
+
+    .hero-card p{max-width:610px;color:#d9dbe0;font-size:15px;line-height:1.55;margin-bottom:25px}
+
+    .btn-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding:13px 19px;
+      font-weight:850;
+      font-size:12px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .btn-primary{background:var(--yellow);color:#111}
+    .btn-secondary{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.16)}
+
+    .score-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 20px 55px rgba(0,0,0,.10);
+    }
+
+    .score-card h2{font-size:20px;line-height:1.1;margin:8px 0}
+    .score-card p{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:18px}
+    .risk-line{
+      display:flex;justify-content:flex-start;align-items:center;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      margin-bottom:10px;
+      font-size:13px;
+      background:#fbfbfb;
+    }
+    .risk-line strong{font-size:12px;text-transform:uppercase}
+
+    .notice{
+      margin:18px 0 22px;
+      background:white;
+      border-radius:14px;
+      border-left:5px solid var(--yellow);
+      padding:18px 20px;
+      box-shadow:0 12px 35px rgba(0,0,0,.06);
+      color:#555b65;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .content-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(300px,.72fr);
+      gap:22px;
+      align-items:start;
+    }
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:25px;
+      box-shadow:0 20px 65px rgba(0,0,0,.08);
+    }
+
+    .panel h2{
+      font-size:31px;
+      line-height:1.05;
+      letter-spacing:-.035em;
+      margin:9px 0 10px;
+    }
+
+    .panel .desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:18px}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+    label{display:block;font-size:12px;font-weight:800;margin-bottom:7px;color:#3f4249}
+    input,select{
+      width:100%;
+      border:1px solid #dddfe4;
+      border-radius:10px;
+      padding:12px 13px;
+      background:#fbfbfb;
+      outline:none;
+      font-size:14px;
+    }
+    input:focus,select:focus{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,200,0,.18)}
+    input:invalid.touched{border-color:#d94b3f}
+
+    .question{
+      border:1px solid #ececec;
+      border-radius:14px;
+      padding:16px;
+      margin-bottom:13px;
+      background:#fff;
+    }
+
+    .q-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+      font-weight:850;
+      margin-bottom:13px;
+    }
+
+    .q-number{
+      flex:0 0 auto;
+      width:24px;height:24px;border-radius:50%;
+      background:var(--yellow);
+      display:grid;place-items:center;
+      font-size:11px;font-weight:900;color:#111;
+    }
+
+    .options{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .option{
+      position:relative;
+      border:1px solid #e3e5e9;
+      border-radius:12px;
+      padding:14px;
+      min-height:58px;
+      cursor:pointer;
+      background:#fbfbfb;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      transition:.16s ease;
+    }
+
+    .option:hover{border-color:#cfd2d9;transform:translateY(-1px)}
+    .option input{width:auto;accent-color:var(--yellow)}
+    .option span{font-size:13px;font-weight:800;color:#333}
+
+    .option:has(input:checked){
+      border-color:var(--yellow);
+      background:#fff9d7;
+      box-shadow:0 0 0 3px rgba(255,200,0,.16);
+    }
+
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn-dark{background:var(--dark);color:#fff}
+
+    .result-card{
+      position:sticky;
+      top:18px;
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .result-box{
+      border-radius:18px;
+      padding:28px 22px;
+      border:1px solid var(--line);
+      background:#fbfbfb;
+    }
+
+    .result-status{
+      display:inline-flex;
+      margin:0 auto 12px;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:11px;
+      font-weight:900;
+      background:var(--yellow);
+      color:#111;
+      text-transform:uppercase;
+    }
+
+    .result-title{
+      font-size:30px;
+      line-height:1.05;
+      margin-bottom:10px;
+      letter-spacing:-.035em;
+    }
+
+    .result-text{font-size:13px;color:var(--muted);line-height:1.55}
+    .score-number{font-size:46px;font-weight:950;margin:12px 0 4px;color:#111}
+
+
+
+
+
+
+
+
+
+
+    footer{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:25px 0 36px;
+      font-size:12px;color:#60646d;
+    }
+
+    @media(max-width:920px){
+      nav a{display:none}
+      .hero-grid,.content-grid{grid-template-columns:1fr}
+      h1{font-size:42px}
+      .result-card{position:static}
+      .options{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+      footer{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="mark">LBF</div>
+        <div class="brand-text">
+          <strong>LBF Consultoria</strong>
+          <span>Consultoria e perícias multidisciplinares</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#triagem">Triagem</a>
+        <button class="nav-cta" onclick="document.getElementById('triagem').scrollIntoView({behavior:'smooth'})">Solicitar consultoria</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-grid">
+        <div class="hero-card">
+          <span class="tag">Análise técnica preventiva</span>
+          <h1>Robustez técnica para decisões processuais</h1>
+          <p>Avaliação preliminar de robustez técnica e identificação de fragilidades relevantes capazes de comprometer a sustentação probatória do litígio processual.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#triagem">Iniciar triagem técnica</a>
+            <a class="btn btn-secondary" href="#triagem">Ver formulário</a>
+          </div>
+        </div>
+
+        <aside class="score-card">
+          <span class="tag">Diagnóstico preliminar</span>
+          <h2>Prova digital ou documental</h2>
+          <p>A triagem considera um conjunto de respostas objetivas para indicar, de forma preliminar, o grau de atenção técnica necessário antes da sustentação da prova.</p>
+          <div class="risk-line"><strong>Baixo risco técnico</strong></div>
+          <div class="risk-line"><strong>Risco técnico moderado</strong></div>
+          <div class="risk-line"><strong>Alto risco técnico</strong></div>
+        </aside>
+      </section>
+
+      <div class="notice">
+        O risco técnico raramente aparece de forma evidente no processo. A triagem auxilia a identificar pontos de atenção antes que a fragilidade se consolide no contraditório.
+      </div>
+
+      <section class="content-grid" id="triagem">
+        <form class="panel" id="riskForm">
+          <span class="tag">Formulário técnico</span>
+          <h2>Avaliação de fragilidade técnica da prova</h2>
+          <p class="desc">Preencha as informações abaixo para gerar uma leitura preliminar de risco probatório. Os campos marcados como obrigatórios devem ser preenchidos.</p>
+
+          <div class="form-grid">
+            <div>
+              <label for="cliente">Nome do cliente *</label>
+              <input id="cliente" name="cliente" type="text" placeholder="Ex.: João da Silva" required />
+            </div>
+            <div>
+              <label for="email">E-mail para contato *</label>
+              <input id="email" name="email" type="email" placeholder="email@exemplo.com" required />
+            </div>
+            <div>
+              <label for="telefone">WhatsApp *</label>
+              <input id="telefone" name="telefone" type="tel" placeholder="(21) 99999-9999" required />
+            </div>
+            <div>
+              <label for="area">Área do litígio</label>
+              <select id="area" name="area">
+                <option>Selecione</option>
+                <option>Cível</option>
+                <option>Consumidor</option>
+                <option>Trabalhista</option>
+                <option>Criminal</option>
+                <option>Família</option>
+                <option>Empresarial</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="questions"></div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Calcular risco técnico</button>
+            <button type="button" class="btn btn-dark" id="clearBtn">Limpar formulário</button>
+          </div>
+        </form>
+
+        <aside class="panel result-card">
+          <div class="result-box" id="resultBox">
+            <span class="result-status">Resultado</span>
+            <h2 class="result-title">Aguardando respostas</h2>
+            <p class="result-text">Preencha o formulário para gerar o diagnóstico preliminar de robustez técnica.</p>
+          </div>
+        </aside>
+      </section>
+
+      
+    </main>
+
+    <footer>
+      <div>
+        <strong>LBF Consultoria</strong><br>
+        Análise técnica, prova digital e inteligência probatória.
+      </div>
+      <div>contato@lbfconsultoria.com.br</div>
+    </footer>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "A prova principal é:",
+        name: "q1",
+        options: [
+          {label:"Print de tela", value:3},
+          {label:"PDF/exportação", value:2},
+          {label:"Arquivo original", value:0}
+        ]
+      },
+      {
+        text: "A prova já foi contraditada ou questionada pela parte adversa?",
+        name: "q2",
+        options: [
+          {label:"Sim", value:4},
+          {label:"Não sei", value:2},
+          {label:"Não", value:0}
+        ]
+      },
+      {
+        text: "Você possui o arquivo original da prova?",
+        name: "q3",
+        options: [
+          {label:"Não", value:4},
+          {label:"Não sei", value:2},
+          {label:"Sim", value:0}
+        ]
+      },
+      {
+        text: "Existe possibilidade de corte, edição, recorte ou manipulação?",
+        name: "q4",
+        options: [
+          {label:"Sim", value:4},
+          {label:"Talvez", value:2},
+          {label:"Não", value:0}
+        ]
+      },
+      {
+        text: "A prova envolve sequência lógica de conversas, datas, mensagens, notificações ou eventos?",
+        name: "q5",
+        options: [
+          {label:"Sim", value:3},
+          {label:"Não sei", value:1},
+          {label:"Não", value:0}
+        ]
+      },
+      {
+        text: "Houve preservação técnica da prova, como extração, backup ou cadeia de custódia?",
+        name: "q6",
+        options: [
+          {label:"Não", value:4},
+          {label:"Não sei", value:2},
+          {label:"Sim", value:0}
+        ]
+      },
+      {
+        text: "É possível demonstrar tecnicamente como essa prova foi obtida?",
+        name: "q7",
+        options: [
+          {label:"Não", value:3},
+          {label:"Parcial", value:1},
+          {label:"Sim", value:0}
+        ]
+      },
+      {
+        text: "Essa prova já foi analisada tecnicamente antes de ser utilizada?",
+        name: "q8",
+        options: [
+          {label:"Não", value:3},
+          {label:"Não sei", value:2},
+          {label:"Sim", value:0}
+        ]
+      },
+      {
+        text: "A prova é o principal elemento do caso?",
+        name: "q9",
+        options: [
+          {label:"Sim", value:4},
+          {label:"Parcialmente", value:2},
+          {label:"Não", value:0}
+        ]
+      },
+      {
+        text: "A outra parte já contestou ou pode contestar a autenticidade?",
+        name: "q10",
+        options: [
+          {label:"Sim", value:4},
+          {label:"Possivelmente", value:2},
+          {label:"Não", value:0}
+        ]
+      }
+    ];
+
+    const questionsDiv = document.getElementById("questions");
+    const resultBox = document.getElementById("resultBox");
+    const form = document.getElementById("riskForm");
+    const historyBody = null;
+
+    function renderQuestions(){
+      questionsDiv.innerHTML = questions.map((q, index) => `
+        <div class="question">
+          <div class="q-title"><span class="q-number">${index + 1}</span>${q.text}</div>
+          <div class="options">
+            ${q.options.map((opt, optIndex) => `
+              <label class="option">
+                <span>${opt.label}</span>
+                <input type="radio" name="${q.name}" value="${opt.value}" ${optIndex === 0 ? "required" : ""}>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function getRisk(score){
+      if(score <= 8){
+        return {
+          level:"Baixo risco",
+          title:"Baixo risco técnico preliminar",
+          text:"As respostas indicam menor exposição técnica neste primeiro filtro. Ainda assim, a análise documental pode ser útil quando a prova for estratégica.",
+          bg:"var(--risk-low)"
+        };
+      }
+      if(score <= 18){
+        return {
+          level:"Risco moderado",
+          title:"Risco técnico moderado",
+          text:"Há pontos de atenção que podem comprometer a robustez da prova se não forem analisados antes da sustentação processual.",
+          bg:"var(--risk-medium)"
+        };
+      }
+      return {
+        level:"Alto risco",
+        title:"Alto risco técnico probatório",
+        text:"As respostas indicam fragilidades relevantes. Recomenda-se uma análise técnica antes da utilização ou sustentação da prova.",
+        bg:"var(--risk-high)"
+      };
+    }
+
+    function calculateScore(){
+      return questions.reduce((total, q) => {
+        const selected = document.querySelector(`input[name="${q.name}"]:checked`);
+        return total + (selected ? Number(selected.value) : 0);
+      }, 0);
+    }
+
+    function saveHistory(item){ return; }
+
+    function renderHistory(){ return; }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      [...form.querySelectorAll("input")].forEach(input => input.classList.add("touched"));
+
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      const score = calculateScore();
+      const risk = getRisk(score);
+
+      const dadosParaPlanilha = new FormData();
+      dadosParaPlanilha.append("cliente", document.getElementById("cliente").value.trim());
+      dadosParaPlanilha.append("email", document.getElementById("email").value.trim());
+      dadosParaPlanilha.append("telefone", document.getElementById("telefone").value.trim());
+      dadosParaPlanilha.append("area", document.getElementById("area").value);
+      dadosParaPlanilha.append("score", score);
+      dadosParaPlanilha.append("risco", risk.level);
+      dadosParaPlanilha.append("respostas", JSON.stringify(
+        questions.map(q => {
+          const selected = document.querySelector(`input[name="${q.name}"]:checked`);
+          return {
+            pergunta: q.text,
+            resposta: selected ? selected.closest(".option").querySelector("span").innerText : ""
+          };
+        })
+      ));
+
+      fetch("https://script.google.com/macros/s/AKfycbw5xFl9_F54An-uOVX8C3dnizsjCZFL9LRxx6Rv2Y-hBysYK-kg0qCTW2nSi5ZPiClB/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: dadosParaPlanilha
+      }).catch(() => {
+        console.log("Não foi possível enviar os dados para a planilha neste momento.");
+      });
+
+
+
+      resultBox.style.background = risk.bg;
+      resultBox.innerHTML = `
+        <span class="result-status">Resultado</span>
+        <h2 class="result-title">${risk.title}</h2>
+        <div class="score-number">${score}</div>
+        <p class="result-text">${risk.text}</p>
+      `;
+
+      const item = {
+        date: new Date().toLocaleDateString("pt-BR"),
+        client: document.getElementById("cliente").value.trim(),
+        area: document.getElementById("area").value || "Não informada",
+        score,
+        risk: risk.level
+      };
+
+      saveHistory(item);
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      form.reset();
+      resultBox.style.background = "#fbfbfb";
+      resultBox.innerHTML = `
+        <span class="result-status">Resultado</span>
+        <h2 class="result-title">Aguardando respostas</h2>
+        <p class="result-text">Preencha o formulário para gerar o diagnóstico preliminar de robustez técnica.</p>
+      `;
+    });
+
+
+    renderQuestions();
+    renderHistory();
+  </script>
+</body>
+</html>
